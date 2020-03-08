@@ -1,22 +1,10 @@
-#
-# This is free software, lisence use MIT.
-# 
-# Copyright (C) 2019 P3TERX <https://p3terx.com>
-# Copyright (C) 2019 KFERMercer <KFER.Mercer@gmail.com>
-# 
-# <https://github.com/KFERMercer/OpenWrt-CI>
-#
-
-name: OpenWrt-CI
+name: openwrt for PSG1218a
 
 on:
-  schedule:
-    - cron: 0 20 * * *
-  release:
-    types: [published]
-  # push:
-  #   branches: 
-  #     - master
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
 
@@ -65,7 +53,7 @@ jobs:
           find ./dl/ -size -1024c -exec rm -f {} \;
       - name: Compile firmware
         run: |
-          make -j$(nproc) || make -j1 V=s
+          make -j$(nproc) || make -j10 V=s
           echo "======================="
           echo "Space usage:"
           echo "======================="
@@ -79,5 +67,5 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@master
         with:
-          name: OpenWrt firmware
+          name: OpenWrt PSG1218a firmware
           path: ./bin/targets/
