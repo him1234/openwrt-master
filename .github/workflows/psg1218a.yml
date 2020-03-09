@@ -74,7 +74,7 @@ jobs:
       - name: Gzip
         run: |
           mkdir openwrt-psg1218a-${{ matrix.os }}
-          cp ./bin/targets/ramips/mt7620 openwrt-psg1218a-${{ matrix.os }}
+          cp -r ./bin/targets/ramips/mt7620 openwrt-psg1218a-${{ matrix.os }}
           tar -czvf openwrt-psg1218a-${{ matrix.os }}.tar.gz openwrt-psg1218a-${{ matrix.os }}
           
       - name: Upload to release

@@ -2,9 +2,9 @@ name: openwrt for PSG1218a
 
 on:
   push:
-    branches: [ openwrt-19.07 ]
+    branches: [ master ]
   pull_request:
-    branches: [ openwrt-19.07 ]
+    branches: [ master ]
 
 jobs:
 
@@ -17,7 +17,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
         with:
-          ref: master
+          ref: openwrt-19.07
 
       - name: Space cleanup
         env:
