@@ -15,4 +15,4 @@ jobs:
         with:
           config-name: release-drafter.yml
         env:
-          GITHUB_TOKEN: ${{ secrets.password }}
+          GITHUB_TOKEN: ${{ secrets.RELEASES_TOKEN}}

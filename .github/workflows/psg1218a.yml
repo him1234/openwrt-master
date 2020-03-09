@@ -78,7 +78,7 @@ jobs:
             name: OpenWrt PSG1218a firmware
             path: ./bin/targets/
         env:
-           GITHUB_TOKEN: ${{ secrets.password }}
+           GITHUB_TOKEN: ${{ secrets.RELEASES_TOKEN }}
 
 
 
