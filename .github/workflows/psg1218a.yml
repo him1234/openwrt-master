@@ -45,7 +45,7 @@ jobs:
           ./scripts/feeds install -a
       - name: Generate configuration file
         run: |
-          cp ./mediatek.config ./.config
+          cp ./buildconfig/psg1218a.config ./.config
           make defconfig
       - name: Make download
         run: |
