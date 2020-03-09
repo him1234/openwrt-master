@@ -15,7 +15,7 @@ jobs:
     steps:
 
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@openwrt-19.07
         with:
           ref: openwrt-19.07
 
