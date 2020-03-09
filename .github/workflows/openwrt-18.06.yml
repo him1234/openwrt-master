@@ -1,4 +1,4 @@
-name: openwrt for PSG1218a
+name: openwrt-18.06 for PSG1218a
 
 on:
   push:
