@@ -69,3 +69,20 @@ jobs:
         with:
           name: OpenWrt PSG1218a firmware
           path: ./bin/targets/
+          
+          
+      - name: Gzip
+        run: |
+          mkdir openwrt-psg1218a-${{ matrix.os }}
+          cp ./bin/targets/ramips/mt7620 openwrt-psg1218a-${{ matrix.os }}
+          tar -czvf openwrt-psg1218a-${{ matrix.os }}.tar.gz openwrt-psg1218a-${{ matrix.os }}
+          
+      - name: Upload to release
+        uses: JasonEtco/upload-to-release@master
+        with:
+          args: openwrt-psg1218a-${{ matrix.os }}.tar.gz application/octet-stream
+                ./bin/targets/*  application/octet-stream
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
