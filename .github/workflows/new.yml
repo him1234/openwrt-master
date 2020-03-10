@@ -21,9 +21,13 @@ jobs:
         run: |
           tar --warning=no-file-changed -czvf release.tar.gz ./package
           
-      - name: Upload to Release
-        uses: JasonEtco/upload-to-release@master
+      - uses: majkrzak/create-release@master
         with:
-          args: release.tar.gz 
-        env:
-          GITHUB_TOKEN: ${{ secrets.RELEASES_TOKEN }}
+            token: ${{secrets.RELEASES_TOKEN}}
+            name: My lovely release
+            code: latest
+            prerelease: true
+            assets: >
+                release.tar.gz:target:
+          
+
