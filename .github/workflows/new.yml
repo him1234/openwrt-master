@@ -18,9 +18,9 @@ jobs:
         with:
           ref: master
 
-       - name: Upload to Release
-         uses: JasonEtco/upload-to-release@v0.1.1
-         with:
+      - name: Upload to Release
+        uses: JasonEtco/upload-to-release@v0.1.1
+        with:
           args: /mnt/openwrt-master/*
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASES_TOKEN }}
