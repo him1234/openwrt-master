@@ -27,5 +27,6 @@ jobs:
           branch: master
           name: OpenWrt PSG1218a firmware
           args: release.tar.gz application/octet-stream
+          path: ./release.tar.gz
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASES_TOKEN }}
