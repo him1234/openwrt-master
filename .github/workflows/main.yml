@@ -81,16 +81,16 @@ jobs:
           name: OpenWrt firmware
           path: ./bin/targets/
 
-      - name: 版本打包，准备发布
+      - name: prepare
         run: |
           tar --warning=no-file-changed -czvf release.tar.gz ./bin/targets/
           
-      - name: 发布新版本
+      - name: publish
       - uses: majkrzak/create-release@master
         with:
             token: ${{secrets.RELEASES_TOKEN}}
             name: Openwrt latest for psg1218a daily build
-            code: latest
-            prerelease: false
+            code: daily
+            prerelease: true
             assets: >
                 release.tar.gz:openwrt-psg1218a-latest.tar.gz
