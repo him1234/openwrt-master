@@ -61,6 +61,7 @@ jobs:
           echo "======================="
           du -h ./ --max-depth=1
           du -h /mnt/openwrt/ --max-depth=1
+          
       - name: Prepare artifact
         run: find ./bin/targets/ -type d -name "packages" | xargs rm -rf {}
 
@@ -74,8 +75,7 @@ jobs:
         run: |
           tar --warning=no-file-changed -czvf release.tar.gz ./bin/targets/
           
-      - name: published
-      - uses: majkrzak/create-release@master
+        uses: majkrzak/create-release@master
         with:
             token: ${{secrets.RELEASES_TOKEN}}
             name: Openwrt latest for psg1218a daily build
