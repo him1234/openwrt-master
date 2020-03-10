@@ -1,4 +1,4 @@
-
+name: openwrt for psg1218a最新版
 
 on:
   push:
@@ -74,6 +74,7 @@ jobs:
       - name: publish prepare
         run: |
           tar --warning=no-file-changed -czvf openwrt-psg1218a-latest.tar.gz ./bin/targets/ramips/mt7620
+          cp ./bin/targets/ramips/mt7620 ./
           
       - uses: majkrzak/create-release@master
         with:
@@ -83,6 +84,15 @@ jobs:
             prerelease: true
             assets: >
                 openwrt-psg1218a-latest.tar.gz:openwrt-psg1218a-latest.tar.gz:
+                config.buildinfo:config.buildinfo:
+                feeds.buildinfo:feeds.buildinfo:
+                openwrt-ramips-mt7620-phicomm_psg1218a.manifest:openwrt-ramips-mt7620-phicomm_psg1218a.manifest:
+                openwrt-ramips-mt7620-phicomm_psg1218a-initramfs-kernel.bin:openwrt-ramips-mt7620-phicomm_psg1218a-initramfs-kernel.bin:
+                openwrt-ramips-mt7620-phicomm_psg1218a-squashfs-sysupgrade.bin:openwrt-ramips-mt7620-phicomm_psg1218a-squashfs-sysupgrade.bin:
+                sha256sums:sha256sums:
+                version.buildinfo:version.buildinfo:
+                
+                
 
 
 
