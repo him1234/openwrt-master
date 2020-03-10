@@ -271,6 +271,14 @@ network_is_up()
 # 2: interface
 network_get_protocol() { __network_ifstatus "$1" "$2" ".proto"; }
 
+<<<<<<< HEAD
+=======
+# determine the uptime of the given logical interface
+# 1: destination variable
+# 2: interface
+network_get_uptime() { __network_ifstatus "$1" "$2" ".uptime"; }
+
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 # determine the metric of the given logical interface
 # 1: destination variable
 # 2: interface

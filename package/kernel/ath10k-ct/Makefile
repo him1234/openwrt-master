@@ -1,21 +1,25 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=ath10k-ct
+<<<<<<< HEAD
 PKG_RELEASE=3
+=======
+PKG_RELEASE=1
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 
 PKG_LICENSE:=GPLv2
 PKG_LICENSE_FILES:=
 
 PKG_SOURCE_URL:=https://github.com/greearb/ath10k-ct.git
 PKG_SOURCE_PROTO:=git
-PKG_SOURCE_DATE:=2018-03-16
-PKG_SOURCE_VERSION:=30827f7d5b9841905c4efe918da2d95fc518c921
-PKG_MIRROR_HASH:=aac023d7f9b09becf27058b1d09ae6d068b14bb6f10c5b5a248c7ee5ecff04dc
+PKG_SOURCE_DATE:=2020-02-18
+PKG_SOURCE_VERSION:=bed49a5f6824fcd8757fd27f6b2a4f6ea933bf2f
+PKG_MIRROR_HASH:=4f16b1b44b0be6c2dba92754e78888533fdc6bfbf63ae673301a49c47c5e53ea
 
-# Build the 4.13 ath10k-ct driver version.  Other options are "-4.9", or
-# leave un-defined for 4.7 kernel.  Probably this should match as closely as
+# Build the 5.4 ath10k-ct driver version.  Other option is "-4.19".
+# Probably this should match as closely as
 # possible to whatever mac80211 backports version is being used.
-CT_KVER="-4.13"
+CT_KVER="-5.4"
 
 PKG_MAINTAINER:=Ben Greear <greearb@candelatech.com>
 PKG_BUILD_PARALLEL:=1
@@ -35,6 +39,21 @@ define KernelPackage/ath10k-ct
 	$(PKG_BUILD_DIR)/ath10k$(CT_KVER)/ath10k_core.ko
   AUTOLOAD:=$(call AutoProbe,ath10k_pci)
   PROVIDES:=kmod-ath10k
+  VARIANT:=regular
+endef
+
+define KernelPackage/ath10k-ct/config
+
+       config ATH10K-CT_LEDS
+               bool "Enable LED support"
+               default y
+               depends on PACKAGE_kmod-ath10k-ct || PACKAGE_kmod-ath10k-ct-smallbuffers
+endef
+
+define KernelPackage/ath10k-ct-smallbuffers
+$(call KernelPackage/ath10k-ct)
+  TITLE+= (small buffers for low-RAM devices)
+  VARIANT:=smallbuffers
 endef
 
 NOSTDINC_FLAGS = \
@@ -50,7 +69,7 @@ ifdef CONFIG_PACKAGE_MAC80211_MESH
   NOSTDINC_FLAGS += -DCONFIG_MAC80211_MESH
 endif
 
-CT_MAKEDEFS += CONFIG_ATH10K=m CONFIG_ATH10K_PCI=m
+CT_MAKEDEFS += CONFIG_ATH10K=m CONFIG_ATH10K_PCI=m CONFIG_ATH10K_CE=y
 
 # This AHB logic is needed for IPQ4019 radios
 CT_MAKEDEFS += CONFIG_ATH10K_AHB=m
@@ -77,6 +96,15 @@ ifdef CONFIG_PACKAGE_ATH_SPECTRAL
   NOSTDINC_FLAGS += -DCONFIG_ATH10K_SPECTRAL
 endif
 
+ifeq ($(CONFIG_ATH10K-CT_LEDS),y)
+  CT_MAKEDEFS += CONFIG_ATH10K_LEDS=y
+  NOSTDINC_FLAGS += -DCONFIG_ATH10K_LEDS
+endif
+
+ifeq ($(BUILD_VARIANT),smallbuffers)
+  NOSTDINC_FLAGS += -DCONFIG_ATH10K_SMALLBUFFERS
+endif
+
 define Build/Configure
 	cp $(STAGING_DIR)/usr/include/mac80211/ath/*.h $(PKG_BUILD_DIR)
 endef
@@ -88,9 +116,10 @@ endif
 define Build/Compile
 	+$(MAKE) $(CT_MAKEDEFS) $(PKG_JOBS) -C "$(LINUX_DIR)" \
 		$(KERNEL_MAKE_FLAGS) \
-		SUBDIRS="$(PKG_BUILD_DIR)/ath10k$(CT_KVER)" \
+		M="$(PKG_BUILD_DIR)/ath10k$(CT_KVER)" \
 		NOSTDINC_FLAGS="$(NOSTDINC_FLAGS)" \
 		modules
 endef
 
 $(eval $(call KernelPackage,ath10k-ct))
+$(eval $(call KernelPackage,ath10k-ct-smallbuffers))

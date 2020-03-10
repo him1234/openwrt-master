@@ -8,12 +8,17 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=json-c
+<<<<<<< HEAD
 PKG_VERSION:=0.12.1
 PKG_RELEASE:=2
+=======
+PKG_VERSION:=0.13.1
+PKG_RELEASE:=1
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-nodoc.tar.gz
 PKG_SOURCE_URL:=https://s3.amazonaws.com/json-c_releases/releases/
-PKG_HASH:=5a617da9aade997938197ef0f8aabd7f97b670c216dc173977e1d56eef9e1291
+PKG_HASH:=94a26340c0785fcff4f46ff38609cf84ebcd670df0c8efd75d039cc951d80132
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_SOURCE_SUBDIR)
 
@@ -38,6 +43,10 @@ define Package/libjson-c
   CATEGORY:=Libraries
   TITLE:=javascript object notation
   URL:=https://json-c.github.io/json-c/
+<<<<<<< HEAD
+=======
+  ABI_VERSION:=4
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 endef
 
 define Package/libjson-c/description

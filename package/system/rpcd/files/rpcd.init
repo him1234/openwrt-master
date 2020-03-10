@@ -12,10 +12,17 @@ start_service() {
 
 	procd_open_instance
 	procd_set_param command "$PROG" ${socket:+-s "$socket"} ${timeout:+-t "$timeout"}
+<<<<<<< HEAD
+=======
+	procd_set_param respawn ${respawn_retry:-0}
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 	procd_close_instance
 }
 
 reload_service() {
 	procd_send_signal rpcd
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef

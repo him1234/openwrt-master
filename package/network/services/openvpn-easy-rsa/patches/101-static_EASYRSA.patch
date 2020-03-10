@@ -1,5 +1,12 @@
+<<<<<<< HEAD
 --- a/easyrsa
 +++ b/easyrsa
+=======
+Index: EasyRSA-3.0.4/easyrsa
+===================================================================
+--- EasyRSA-3.0.4.orig/easyrsa
++++ EasyRSA-3.0.4/easyrsa
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 @@ -1033,7 +1033,7 @@ vars_setup() {
  	vars=
  

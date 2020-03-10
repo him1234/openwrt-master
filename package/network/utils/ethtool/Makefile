@@ -8,13 +8,21 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=ethtool
+<<<<<<< HEAD
 PKG_VERSION:=4.19
+=======
+PKG_VERSION:=5.4
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 PKG_RELEASE:=1
 
 PKG_MAINTAINER:=Felix Fietkau <nbd@nbd.name>
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=@KERNEL/software/network/ethtool
+<<<<<<< HEAD
 PKG_HASH:=b18a6c364e42c29cdac057cf183c9674163db96b30848adfa8c2a90450f6d0c8
+=======
+PKG_HASH:=22f81e4927d6eb6a13a259d705248a96005fce2005e15257f639f5a1c8c52b6b
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 
 PKG_LICENSE:=GPL-2.0
 PKG_LICENSE_FILES:=COPYING

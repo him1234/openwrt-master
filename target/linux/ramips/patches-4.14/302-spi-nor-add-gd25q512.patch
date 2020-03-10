@@ -1,6 +1,10 @@
 --- a/drivers/mtd/spi-nor/spi-nor.c
 +++ b/drivers/mtd/spi-nor/spi-nor.c
+<<<<<<< HEAD
 @@ -1064,6 +1064,11 @@ static const struct flash_info spi_nor_i
+=======
+@@ -1066,6 +1066,11 @@ static const struct flash_info spi_nor_i
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
  			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
  			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
  	},

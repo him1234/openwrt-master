@@ -8,14 +8,19 @@ include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/target.mk
 
 PKG_NAME:=musl
+<<<<<<< HEAD
 PKG_VERSION:=1.1.19
 PKG_RELEASE=3
+=======
+PKG_VERSION:=1.1.24
+PKG_RELEASE:=1
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
-PKG_SOURCE_VERSION:=55df09bfccbfe21fc9dd7d8f94550c0ff25ace04
-PKG_MIRROR_HASH:=eb94e4e7e94221dd8890afd9b29e2562c36cf5585649035349ca1c6c1c354f2b
-PKG_SOURCE_URL:=git://git.musl-libc.org/musl
+PKG_SOURCE_VERSION:=ea9525c8bcf6170df59364c4bcd616de1acf8703
+PKG_MIRROR_HASH:=6975c45b9bfe586ac00dbfcd1b1a13ab110af0528028ab3dee03e23e2c0763e5
+PKG_SOURCE_URL:=https://git.musl-libc.org/git/musl
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.xz
 
 LIBC_SO_VERSION:=$(PKG_VERSION)
@@ -28,6 +33,9 @@ HOST_BUILD_DIR:=$(BUILD_DIR_TOOLCHAIN)/$(PKG_NAME)-$(PKG_VERSION)
 include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/hardening.mk
 
+TARGET_CFLAGS:= $(filter-out -O%,$(TARGET_CFLAGS))
+TARGET_CFLAGS+= $(if $(CONFIG_MUSL_DISABLE_CRYPT_SIZE_HACK),,-DCRYPT_SIZE_HACK)
+
 MUSL_CONFIGURE:= \
 	$(TARGET_CONFIGURE_OPTS) \
 	CFLAGS="$(TARGET_CFLAGS)" \
@@ -37,7 +45,8 @@ MUSL_CONFIGURE:= \
 		--host=$(GNU_HOST_NAME) \
 		--target=$(REAL_GNU_TARGET_NAME) \
 		--disable-gcc-wrapper \
-		--enable-debug
+		--enable-debug \
+		--enable-optimize
 
 define Host/Configure
 	ln -snf $(PKG_NAME)-$(PKG_VERSION) $(BUILD_DIR_TOOLCHAIN)/$(PKG_NAME)

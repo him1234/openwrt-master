@@ -46,6 +46,7 @@
  
  /**
   * \def MBEDTLS_ECP_NIST_OPTIM
+<<<<<<< HEAD
 @@ -818,7 +818,7 @@
   *
   * Comment this macro to disable deterministic ECDSA.
@@ -55,6 +56,8 @@
  
  /**
   * \def MBEDTLS_KEY_EXCHANGE_PSK_ENABLED
+=======
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 @@ -871,7 +871,7 @@
   *             See dhm.h for more details.
   *
@@ -126,6 +129,7 @@
  
  /**
   * \def MBEDTLS_SHA256_SMALLER
+<<<<<<< HEAD
 @@ -1296,7 +1296,7 @@
   *
   * Uncomment to enable the smaller implementation of SHA256.
@@ -135,6 +139,8 @@
  
  /**
   * \def MBEDTLS_SSL_ALL_ALERT_MESSAGES
+=======
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 @@ -1434,7 +1434,7 @@
   *          configuration of this extension).
   *
@@ -198,6 +204,7 @@
  
  /**
   * \def MBEDTLS_CHACHA20_C
+<<<<<<< HEAD
 @@ -2115,7 +2115,7 @@
   *
   * Module:  library/chacha20.c
@@ -225,6 +232,8 @@
  
  /**
   * \def MBEDTLS_DES_C
+=======
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 @@ -2214,7 +2214,7 @@
   * \warning   DES is considered a weak cipher and its use constitutes a
   *            security risk. We recommend considering stronger ciphers instead.
@@ -243,6 +252,7 @@
  
  /**
   * \def MBEDTLS_HMAC_DRBG_C
+<<<<<<< HEAD
 @@ -2391,7 +2391,7 @@
   *
   * Uncomment to enable the HMAC_DRBG random number geerator.
@@ -270,6 +280,17 @@
  
  /**
   * \def MBEDTLS_RIPEMD160_C
+=======
+@@ -2687,7 +2687,7 @@
+  *
+  * This module enables abstraction of common (libc) functions.
+  */
+-#define MBEDTLS_PLATFORM_C
++//#define MBEDTLS_PLATFORM_C
+ 
+ /**
+  * \def MBEDTLS_POLY1305_C
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 @@ -2708,7 +2708,7 @@
   * Caller:  library/md.c
   *

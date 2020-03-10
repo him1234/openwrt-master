@@ -18,6 +18,7 @@ PKG_MIRROR_HASH:=ebec09286cf5f977cac893931a5a4f27ba891db88d5e44a9b0de9446ae43152
 PKG_MAINTAINER:=Felix Fietkau <nbd@nbd.name>
 PKG_LICENSE:=ISC
 
+PKG_ASLR_PIE_REGULAR:=1
 PKG_BUILD_DEPENDS = ustream-ssl
 PKG_CONFIG_DEPENDS:= CONFIG_uhttpd_lua
 
@@ -34,7 +35,7 @@ endef
 
 define Package/uhttpd
   $(Package/uhttpd/default)
-  DEPENDS:=+libubox +libblobmsg-json +libjson-script
+  DEPENDS:=+libubox +libblobmsg-json +libjson-script +libjson-c
 endef
 
 define Package/uhttpd/description

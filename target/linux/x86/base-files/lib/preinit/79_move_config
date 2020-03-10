@@ -9,8 +9,13 @@ move_config() {
 	if export_bootdevice && export_partdevice partdev 1; then
 		mkdir -p /boot
 		mount -t ext4 -o rw,noatime "/dev/$partdev" /boot
+<<<<<<< HEAD
 		if [ -f /boot/sysupgrade.tgz ]; then
 			mv -f /boot/sysupgrade.tgz /
+=======
+		if [ -f "/boot/$BACKUP_FILE" ]; then
+			mv -f "/boot/$BACKUP_FILE" /
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 		fi
 		mount --bind /boot/boot /boot
 	fi

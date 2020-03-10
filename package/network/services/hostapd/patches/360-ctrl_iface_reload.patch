@@ -78,7 +78,11 @@
  
  #ifdef CONFIG_IEEE80211W
  #ifdef NEED_AP_MLME
+<<<<<<< HEAD
 @@ -3031,6 +3088,8 @@ static int hostapd_ctrl_iface_receive_pr
+=======
+@@ -3195,6 +3252,8 @@ static int hostapd_ctrl_iface_receive_pr
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
  	} else if (os_strncmp(buf, "VENDOR ", 7) == 0) {
  		reply_len = hostapd_ctrl_iface_vendor(hapd, buf + 7, reply,
  						      reply_size);
@@ -89,7 +93,11 @@
  #ifdef RADIUS_SERVER
 --- a/src/ap/ctrl_iface_ap.c
 +++ b/src/ap/ctrl_iface_ap.c
+<<<<<<< HEAD
 @@ -864,7 +864,13 @@ int hostapd_parse_csa_settings(const cha
+=======
+@@ -874,7 +874,13 @@ int hostapd_parse_csa_settings(const cha
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
  
  int hostapd_ctrl_iface_stop_ap(struct hostapd_data *hapd)
  {

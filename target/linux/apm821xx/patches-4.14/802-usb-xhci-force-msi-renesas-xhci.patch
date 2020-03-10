@@ -13,7 +13,11 @@ produce a noisy warning.
 
 --- a/drivers/usb/host/xhci-pci.c
 +++ b/drivers/usb/host/xhci-pci.c
+<<<<<<< HEAD
 @@ -219,7 +219,7 @@ static void xhci_pci_quirks(struct devic
+=======
+@@ -221,7 +221,7 @@ static void xhci_pci_quirks(struct devic
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
  		xhci->quirks |= XHCI_TRUST_TX_LENGTH;
  	if (pdev->vendor == PCI_VENDOR_ID_RENESAS &&
  			pdev->device == 0x0015)

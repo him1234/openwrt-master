@@ -9,7 +9,11 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=gre
 PKG_VERSION:=1
+<<<<<<< HEAD
 PKG_RELEASE:=9
+=======
+PKG_RELEASE:=12
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 PKG_LICENSE:=GPL-2.0
 
 include $(INCLUDE_DIR)/package.mk
@@ -24,6 +28,7 @@ define Package/gre
   TITLE:=Generic Routing Encapsulation config support
   DEPENDS:=+kmod-gre +IPV6:kmod-gre6 +resolveip
   PROVIDES:=grev4 grev6
+  PKGARCH:=all
 endef
 
 define Package/gre/description

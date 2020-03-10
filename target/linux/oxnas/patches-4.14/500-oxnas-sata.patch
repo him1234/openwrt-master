@@ -26,9 +26,15 @@
  obj-$(CONFIG_PATA_ALI)		+= pata_ali.o
 --- a/arch/arm/boot/dts/ox820.dtsi
 +++ b/arch/arm/boot/dts/ox820.dtsi
+<<<<<<< HEAD
 @@ -385,5 +385,20 @@
  			};
  
+=======
+@@ -398,5 +398,20 @@
+ 			plxtech,pcie-outbound-offset = <0x174>;
+ 			status = "disabled";
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
  		};
 +
 +		sata: sata@45900000 {

@@ -30,6 +30,7 @@ get_status_led() {
 	e750g-v8|\
 	eap120|\
 	minibox-v1|\
+	minibox-v3.2|\
 	packet-squirrel|\
 	som9331|\
 	sr3200|\
@@ -66,6 +67,7 @@ get_status_led() {
 	archer-c25-v1|\
 	archer-c58-v1|\
 	archer-c59-v1|\
+	archer-c59-v2|\
 	archer-c60-v1|\
 	archer-c60-v2|\
 	archer-c7-v4|\
@@ -125,6 +127,7 @@ get_status_led() {
 		status_led="$board:red:sys"
 		;;
 	bullet-m|\
+	bullet-m-xw|\
 	loco-m-xw|\
 	nano-m|\
 	nanostation-m|\
@@ -369,6 +372,7 @@ get_status_led() {
 	rb-911g-2hpnd|\
 	rb-911g-5hpacd|\
 	rb-911g-5hpnd|\
+	rb-931-2nd|\
 	rb-941-2nd|\
 	rb-951ui-2nd|\
 	rb-952ui-5ac2nd|\
@@ -376,7 +380,13 @@ get_status_led() {
 	rb-lhg-5nd|\
 	rb-map-2nd|\
 	rb-mapl-2nd|\
+<<<<<<< HEAD
 	rb-wap-2nd)
+=======
+	rb-sxt-2nd-r3|\
+	rb-wap-2nd|\
+	rb-wapr-2nd)
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 		status_led="rb:green:user"
 		;;
 	rb-951ui-2hnd)
@@ -567,6 +577,9 @@ set_state() {
 		status_led_blink_failsafe
 		;;
 	preinit_regular)
+		status_led_blink_preinit_regular
+		;;
+	upgrade)
 		status_led_blink_preinit_regular
 		;;
 	done)

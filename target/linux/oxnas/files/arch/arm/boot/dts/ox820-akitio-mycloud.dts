@@ -23,6 +23,13 @@
 		serial0 = &uart0;
 		gpio0 = &gpio0;
 		gpio1 = &gpio1;
+<<<<<<< HEAD
+=======
+		led-boot = &led_status;
+		led-failsafe = &led_status;
+		led-running = &led_status;
+		led-upgrade = &led_status;
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 	};
 
 	i2c-gpio {
@@ -62,7 +69,11 @@
 		compatible = "gpio-leds";
 		pinctrl-names = "default";
 		pinctrl-0 = <&pinctrl_leds>;
+<<<<<<< HEAD
 		status {
+=======
+		led_status: status {
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 			label = "akitio:red:status";
 			gpios = <&gpio0 29 0>;
 		};
@@ -152,6 +163,13 @@
 	nr-ports = <2>;
 };
 
+<<<<<<< HEAD
+=======
+&pcie_phy {
+	status = "okay";
+};
+
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 &pcie0 {
 	status = "okay";
 };

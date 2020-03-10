@@ -10,6 +10,10 @@ DEVICE_TYPE:=nas
 MAINTAINER:=Daniel Golle <daniel@makrotopia.org>
 
 KERNEL_PATCHVER:=4.14
+<<<<<<< HEAD
+=======
+KERNEL_TESTING_PATCHVER:=5.4
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 
 include $(INCLUDE_DIR)/target.mk
 

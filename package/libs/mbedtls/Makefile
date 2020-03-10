@@ -8,17 +8,28 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=mbedtls
+<<<<<<< HEAD
 PKG_VERSION:=2.16.4
+=======
+PKG_VERSION:=2.16.5
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 PKG_RELEASE:=1
 PKG_USE_MIPS16:=0
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-gpl.tgz
 PKG_SOURCE_URL:=https://tls.mbed.org/download/
+<<<<<<< HEAD
 PKG_HASH:=5fdb9c43ab43fd9bcc3631508170b089ede7b86dd655253a93cb0ffeb42309f3
+=======
+PKG_HASH:=6ebdea6565c714f1315b9af6a802afb4b4e89976f7d5d2b15aa8028eb52e7d09
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 
 PKG_BUILD_PARALLEL:=1
-PKG_LICENSE:=GPL-2.0+
+PKG_LICENSE:=GPL-2.0-or-later
+PKG_LICENSE_FILES:=gpl-2.0.txt
 PKG_CPE_ID:=cpe:/a:arm:mbed_tls
+
+PKG_CONFIG_DEPENDS:=CONFIG_LIBMBEDTLS_DEBUG_C
 
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/cmake.mk
@@ -39,7 +50,21 @@ $(call Package/mbedtls/Default)
   CATEGORY:=Libraries
   SUBMENU:=SSL
   TITLE+= (library)
-  ABI_VERSION:=$(PKG_VERSION)-$(PKG_RELEASE)
+  ABI_VERSION:=12
+endef
+
+define Package/libmbedtls/config
+config LIBMBEDTLS_DEBUG_C
+	depends on PACKAGE_libmbedtls
+	bool "Enable debug functions"
+	default n
+	help
+	 This option enables mbedtls library's debug functions.
+
+	 It increases the uncompressed libmbedtls binary size
+	 by around 60 KiB (for an ARMv5 platform).
+
+	 Usually, you don't need this, so don't select this if you're unsure.
 endef
 
 define Package/mbedtls-util
@@ -71,6 +96,17 @@ CMAKE_OPTIONS += \
 	-DENABLE_TESTING:Bool=OFF \
 	-DENABLE_PROGRAMS:Bool=ON
 
+define Build/Configure
+	$(Build/Configure/Default)
+
+	awk 'BEGIN { rc = 1 } \
+	     /#define MBEDTLS_DEBUG_C/ { $$$$0 = "$(if $(CONFIG_LIBMBEDTLS_DEBUG_C),,// )#define MBEDTLS_DEBUG_C"; rc = 0 } \
+	     { print } \
+	     END { exit(rc) }' $(PKG_BUILD_DIR)/include/mbedtls/config.h \
+	     >$(PKG_BUILD_DIR)/include/mbedtls/config.h.new && \
+	mv $(PKG_BUILD_DIR)/include/mbedtls/config.h.new $(PKG_BUILD_DIR)/include/mbedtls/config.h
+endef
+
 define Build/InstallDev
 	$(INSTALL_DIR) $(1)/usr/include
 	$(CP) $(PKG_INSTALL_DIR)/usr/include/mbedtls $(1)/usr/include/
@@ -81,7 +117,7 @@ endef
 
 define Package/libmbedtls/install
 	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/lib*.so* $(1)/usr/lib/
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/lib*.so.* $(1)/usr/lib/
 endef
 
 define Package/mbedtls-util/install

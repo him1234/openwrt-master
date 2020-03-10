@@ -28,7 +28,11 @@ Signed-off-by: Michael Gray <michael.gray@lantisproject.com>
 
 --- a/arch/arm/Kconfig
 +++ b/arch/arm/Kconfig
+<<<<<<< HEAD
 @@ -1939,6 +1939,17 @@ config ARM_ATAG_DTB_COMPAT_CMDLINE_EXTEN
+=======
+@@ -1934,6 +1934,17 @@ config ARM_ATAG_DTB_COMPAT_CMDLINE_EXTEN
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
  	  The command-line arguments provided by the boot loader will be
  	  appended to the the device tree bootargs property.
  

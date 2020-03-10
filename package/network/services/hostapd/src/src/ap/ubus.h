@@ -18,12 +18,14 @@ enum hostapd_ubus_event_type {
 struct hostapd_ubus_request {
 	enum hostapd_ubus_event_type type;
 	const struct ieee80211_mgmt *mgmt_frame;
-	const struct hostapd_frame_info *frame_info;
+	const struct ieee802_11_elems *elems;
+	int ssi_signal; /* dBm */
 	const u8 *addr;
 };
 
 struct hostapd_iface;
 struct hostapd_data;
+struct hapd_interfaces;
 
 #ifdef UBUS_SUPPORT
 
@@ -44,8 +46,14 @@ void hostapd_ubus_free_bss(struct hostapd_data *hapd);
 int hostapd_ubus_handle_event(struct hostapd_data *hapd, struct hostapd_ubus_request *req);
 void hostapd_ubus_notify(struct hostapd_data *hapd, const char *type, const u8 *mac);
 
+void hostapd_ubus_add(struct hapd_interfaces *interfaces);
+void hostapd_ubus_free(struct hapd_interfaces *interfaces);
+
+<<<<<<< HEAD
+=======
 #else
 
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 struct hostapd_ubus_bss {};
 
 static inline void hostapd_ubus_add_iface(struct hostapd_iface *iface)
@@ -70,6 +78,14 @@ static inline int hostapd_ubus_handle_event(struct hostapd_data *hapd, struct ho
 }
 
 static inline void hostapd_ubus_notify(struct hostapd_data *hapd, const char *type, const u8 *mac)
+{
+}
+
+static inline void hostapd_ubus_add(struct hapd_interfaces *interfaces)
+{
+}
+
+static inline void hostapd_ubus_free(struct hapd_interfaces *interfaces)
 {
 }
 #endif

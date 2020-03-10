@@ -28,6 +28,7 @@ cpe830|\
 cpe870|\
 cr3000|\
 cr5000|\
+dw33d|\
 e1700ac-v2|\
 e600g-v2|\
 e600gac-v2|\
@@ -83,6 +84,11 @@ wzr-hp-ag300h)
 dr342|\
 dr531)
 	ubootenv_add_uci_config "/dev/mtd1" "0x0" "0xf800" "0x10000"
+	;;
+gl-ar150|\
+gl-domino|\
+gl-mifi)
+	ubootenv_add_uci_config "/dev/mtd1" "0x0" "0x8000" "0x10000"
 	;;
 rambutan)
 	ubootenv_add_uci_config "/dev/mtd1" "0x0" "0x20000" "0x20000"

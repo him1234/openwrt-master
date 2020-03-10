@@ -54,7 +54,11 @@ else {
 	my ($sec2, $usec2) = gettime();
 	my (undef, undef, $cuser, $csystem) = times();
 
+<<<<<<< HEAD
 	printf STDERR "%s#%.2f#%.2f#%.2f\n",
+=======
+	printf STDOUT "%s#%.2f#%.2f#%.2f\n",
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 		$prefix, $cuser, $csystem,
 		($sec2 - $sec) + ($usec2 - $usec) / 1000000;
 

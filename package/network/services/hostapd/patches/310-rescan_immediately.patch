@@ -1,6 +1,10 @@
 --- a/wpa_supplicant/wpa_supplicant.c
 +++ b/wpa_supplicant/wpa_supplicant.c
+<<<<<<< HEAD
 @@ -4248,7 +4248,7 @@ wpa_supplicant_alloc(struct wpa_supplica
+=======
+@@ -4474,7 +4474,7 @@ wpa_supplicant_alloc(struct wpa_supplica
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
  	if (wpa_s == NULL)
  		return NULL;
  	wpa_s->scan_req = INITIAL_SCAN_REQ;

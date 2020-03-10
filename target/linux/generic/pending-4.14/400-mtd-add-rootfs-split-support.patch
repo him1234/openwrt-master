@@ -60,7 +60,11 @@ Signed-off-by: Felix Fietkau <nbd@nbd.name>
  /*
   * Given a pointer to the MTD object in the mtd_part structure, we can retrieve
   * the pointer to that structure.
+<<<<<<< HEAD
 @@ -661,6 +665,7 @@ int mtd_add_partition(struct mtd_info *p
+=======
+@@ -671,6 +675,7 @@ int mtd_add_partition(struct mtd_info *p
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
  	if (ret)
  		goto err_remove_part;
  
@@ -68,7 +72,11 @@ Signed-off-by: Felix Fietkau <nbd@nbd.name>
  	mtd_add_partition_attrs(new);
  
  	return 0;
+<<<<<<< HEAD
 @@ -747,6 +752,35 @@ int mtd_del_partition(struct mtd_info *m
+=======
+@@ -757,6 +762,29 @@ int mtd_del_partition(struct mtd_info *m
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
  }
  EXPORT_SYMBOL_GPL(mtd_del_partition);
  
@@ -82,11 +90,6 @@ Signed-off-by: Felix Fietkau <nbd@nbd.name>
 +{
 +}
 +
-+void __weak arch_split_mtd_part(struct mtd_info *master, const char *name,
-+                                int offset, int size)
-+{
-+}
-+
 +static void mtd_partition_split(struct mtd_info *master, struct mtd_part *part)
 +{
 +	static int rootfs_found = 0;
@@ -94,17 +97,20 @@ Signed-off-by: Felix Fietkau <nbd@nbd.name>
 +	if (rootfs_found)
 +		return;
 +
-+	if (!strcmp(part->mtd.name, SPLIT_FIRMWARE_NAME) &&
-+	    IS_ENABLED(CONFIG_MTD_SPLIT_FIRMWARE))
++	if (IS_ENABLED(CONFIG_MTD_SPLIT_FIRMWARE) &&
++	    !strcmp(part->mtd.name, SPLIT_FIRMWARE_NAME) &&
++	    !of_find_property(mtd_get_of_node(&part->mtd), "compatible", NULL))
 +		split_firmware(master, part);
-+
-+	arch_split_mtd_part(master, part->mtd.name, part->offset,
-+			    part->mtd.size);
 +}
++
  /*
   * This function, given a master MTD object and a partition table, creates
   * and registers slave MTD objects which are bound to the master according to
+<<<<<<< HEAD
 @@ -787,6 +821,7 @@ int add_mtd_partitions(struct mtd_info *
+=======
+@@ -797,6 +825,7 @@ int add_mtd_partitions(struct mtd_info *
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
  			goto err_del_partitions;
  		}
  
@@ -112,6 +118,7 @@ Signed-off-by: Felix Fietkau <nbd@nbd.name>
  		mtd_add_partition_attrs(slave);
  		/* Look for subpartitions */
  		parse_mtd_partitions(&slave->mtd, parts[i].types, NULL);
+<<<<<<< HEAD
 --- a/include/linux/mtd/partitions.h
 +++ b/include/linux/mtd/partitions.h
 @@ -110,5 +110,7 @@ int mtd_add_partition(struct mtd_info *m
@@ -122,3 +129,5 @@ Signed-off-by: Felix Fietkau <nbd@nbd.name>
 +				       const char *name, int offset, int size);
  
  #endif
+=======
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef

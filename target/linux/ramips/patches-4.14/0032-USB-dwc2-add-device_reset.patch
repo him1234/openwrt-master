@@ -18,7 +18,11 @@ Signed-off-by: John Crispin <blogic@openwrt.org>
  
  #include <linux/usb/hcd.h>
  #include <linux/usb/ch11.h>
+<<<<<<< HEAD
 @@ -5180,6 +5181,8 @@ int dwc2_hcd_init(struct dwc2_hsotg *hso
+=======
+@@ -5215,6 +5216,8 @@ int dwc2_hcd_init(struct dwc2_hsotg *hso
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
  
  	retval = -ENOMEM;
  

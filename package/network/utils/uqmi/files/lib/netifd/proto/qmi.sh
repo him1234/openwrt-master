@@ -23,17 +23,33 @@ proto_qmi_init_config() {
 	proto_config_add_boolean autoconnect
 	proto_config_add_int plmn
 	proto_config_add_int timeout
+<<<<<<< HEAD
+=======
+	proto_config_add_int mtu
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 	proto_config_add_defaults
 }
 
 proto_qmi_setup() {
 	local interface="$1"
 	local dataformat connstat
+<<<<<<< HEAD
 	local device apn auth username password pincode delay modes pdptype profile dhcpv6 autoconnect plmn timeout $PROTO_DEFAULT_OPTIONS
 	local ip4table ip6table
 	local cid_4 pdh_4 cid_6 pdh_6
 	local ip_6 ip_prefix_length gateway_6 dns1_6 dns2_6
 	json_get_vars device apn auth username password pincode delay modes pdptype profile dhcpv6 autoconnect plmn ip4table ip6table timeout $PROTO_DEFAULT_OPTIONS
+=======
+	local device apn auth username password pincode delay modes pdptype
+	local profile dhcpv6 autoconnect plmn timeout mtu $PROTO_DEFAULT_OPTIONS
+	local ip4table ip6table
+	local cid_4 pdh_4 cid_6 pdh_6
+	local ip_6 ip_prefix_length gateway_6 dns1_6 dns2_6
+
+	json_get_vars device apn auth username password pincode delay modes
+	json_get_vars pdptype profile dhcpv6 autoconnect plmn ip4table
+	json_get_vars ip6table timeout mtu $PROTO_DEFAULT_OPTIONS
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 
 	[ "$timeout" = "" ] && timeout="10"
 
@@ -68,6 +84,14 @@ proto_qmi_setup() {
 		return 1
 	}
 
+<<<<<<< HEAD
+=======
+	[ -n "$mtu" ] && {
+		echo "Setting MTU to $mtu"
+		/sbin/ip link set dev $ifname mtu $mtu
+	}
+
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 	echo "Waiting for SIM initialization"
 	local uninitialized_timeout=0
 	while uqmi -s -d "$device" --get-pin-status | grep '"UIM uninitialized"' > /dev/null; do
@@ -322,9 +346,15 @@ proto_qmi_setup() {
 				proto_add_dns_server "$dns2_6"
 			}
 			[ -n "$zone" ] && {
+<<<<<<< HEAD
 		        	proto_add_data
         			json_add_string zone "$zone"
 			        proto_close_data
+=======
+				proto_add_data
+				json_add_string zone "$zone"
+				proto_close_data
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 			}
 			proto_send_update "$interface"
 		else

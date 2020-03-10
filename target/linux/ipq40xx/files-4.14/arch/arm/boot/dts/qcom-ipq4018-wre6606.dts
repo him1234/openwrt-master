@@ -16,7 +16,10 @@
  */
 
 #include "qcom-ipq4019.dtsi"
+<<<<<<< HEAD
 #include "qcom-ipq4019-bus.dtsi"
+=======
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
 #include <dt-bindings/soc/qcom,tcsr.h>
@@ -63,12 +66,15 @@
 			qcom,wifi_noc_memtype_m0_m2 = <TCSR_WIFI_NOC_MEMTYPE_M0_M2>;
 		};
 
+<<<<<<< HEAD
 		serial@78af000 {
 			pinctrl-0 = <&serial_pins>;
 			pinctrl-names = "default";
 			status = "okay";
 		};
 
+=======
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 		crypto@8e3a000 {
 			status = "okay";
 		};
@@ -87,7 +93,11 @@
 		};
 	};
 
+<<<<<<< HEAD
 	gpio-leds {
+=======
+	leds {
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 		compatible = "gpio-leds";
 
 		wps {
@@ -121,7 +131,11 @@
 		};
 	};
 
+<<<<<<< HEAD
 	gpio-keys {
+=======
+	keys {
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 		compatible = "gpio-keys";
 
 		wps {
@@ -158,7 +172,15 @@
 	};
 };
 
+<<<<<<< HEAD
 &spi_0 {
+=======
+&blsp_dma {
+	status = "okay";
+};
+
+&blsp1_spi1 {
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 	pinctrl-0 = <&spi_0_pins>;
 	pinctrl-names = "default";
 	status = "okay";
@@ -223,6 +245,10 @@
 			};
 
 			partition8@180000 {
+<<<<<<< HEAD
+=======
+				compatible = "denx,fit";
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 				label = "firmware";
 				reg = <0x00180000 0x00ce0000>;
 			};
@@ -242,7 +268,13 @@
 	};
 };
 
+<<<<<<< HEAD
 &blsp_dma {
+=======
+&blsp1_uart1 {
+	pinctrl-0 = <&serial_pins>;
+	pinctrl-names = "default";
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 	status = "okay";
 };
 

@@ -66,16 +66,28 @@ define RequireHeader
   $$(eval $$(call Require,$(1),$(2)))
 endef
 
+<<<<<<< HEAD
 define CleanupPython3
   define Require/python3-cleanup
 	if [ -f "$(STAGING_DIR_HOST)/bin/python" ] && \
 		$(STAGING_DIR_HOST)/bin/python -V 2>&1 | \
 		grep -q 'Python 3'; then \
+=======
+define CleanupPython2
+  define Require/python2-cleanup
+	if [ -f "$(STAGING_DIR_HOST)/bin/python" ] && \
+		$(STAGING_DIR_HOST)/bin/python -V 2>&1 | \
+		grep -q 'Python 2'; then \
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 			rm $(STAGING_DIR_HOST)/bin/python; \
 	fi
   endef
 
+<<<<<<< HEAD
   $$(eval $$(call Require,python3-cleanup))
+=======
+  $$(eval $$(call Require,python2-cleanup))
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 endef
 
 define QuoteHostCommand

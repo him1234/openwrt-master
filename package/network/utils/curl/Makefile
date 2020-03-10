@@ -8,15 +8,24 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=curl
+<<<<<<< HEAD
 PKG_VERSION:=7.60.0
 PKG_RELEASE:=4
+=======
+PKG_VERSION:=7.68.0
+PKG_RELEASE:=1
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=https://dl.uxnr.de/mirror/curl/ \
-	http://curl.mirror.anstey.ca/ \
-	http://curl.askapache.com/download/ \
+	https://curl.mirror.anstey.ca/ \
+	https://curl.askapache.com/download/ \
 	https://curl.haxx.se/download/
+<<<<<<< HEAD
 PKG_HASH:=8736ff8ded89ddf7e926eec7b16f82597d029fc1469f3a551f1fafaac164e6a0
+=======
+PKG_HASH:=b724240722276a27f6e770b952121a3afd097129d8c9fe18e6272dc34192035a
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=COPYING
@@ -91,8 +100,8 @@ define Package/libcurl
   DEPENDS += +LIBCURL_SSH2:libssh2 +LIBCURL_NGHTTP2:libnghttp2 +ca-bundle
   TITLE:=A client-side URL transfer library
   MENU:=1
+  ABI_VERSION:=4
 endef
-
 
 define Package/libcurl/config
   source "$(SOURCE)/Config.in"
@@ -113,11 +122,19 @@ CONFIGURE_ARGS += \
 	--without-librtmp \
 	--without-libidn \
 	--without-ca-path \
+<<<<<<< HEAD
+=======
+	--without-libpsl \
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 	--with-ca-bundle=/etc/ssl/certs/ca-certificates.crt \
 	\
 	$(call autoconf_bool,CONFIG_IPV6,ipv6) \
 	\
+<<<<<<< HEAD
 	$(if $(CONFIG_LIBCURL_WOLFSSL),--with-cyassl="$(STAGING_DIR)/usr",--without-cyassl) \
+=======
+	$(if $(CONFIG_LIBCURL_WOLFSSL),--with-wolfssl="$(STAGING_DIR)/usr",--without-wolfssl) \
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 	$(if $(CONFIG_LIBCURL_GNUTLS),--with-gnutls="$(STAGING_DIR)/usr",--without-gnutls) \
 	$(if $(CONFIG_LIBCURL_OPENSSL),--with-ssl="$(STAGING_DIR)/usr",--without-ssl) \
 	$(if $(CONFIG_LIBCURL_MBEDTLS),--with-mbedtls="$(STAGING_DIR)/usr",--without-mbedtls) \

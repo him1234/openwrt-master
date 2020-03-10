@@ -10,7 +10,11 @@ Signed-off-by: Abhimanyu Vishwakarma <Abhimanyu.Vishwakarma@imgtec.com>
 
 --- a/drivers/mtd/spi-nor/spi-nor.c
 +++ b/drivers/mtd/spi-nor/spi-nor.c
+<<<<<<< HEAD
 @@ -2666,6 +2666,7 @@ int spi_nor_scan(struct spi_nor *nor, co
+=======
+@@ -2671,6 +2671,7 @@ int spi_nor_scan(struct spi_nor *nor, co
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
  	struct device *dev = nor->dev;
  	struct mtd_info *mtd = &nor->mtd;
  	struct device_node *np = spi_nor_get_flash_node(nor);
@@ -18,7 +22,11 @@ Signed-off-by: Abhimanyu Vishwakarma <Abhimanyu.Vishwakarma@imgtec.com>
  	int ret;
  	int i;
  
+<<<<<<< HEAD
 @@ -2741,7 +2742,12 @@ int spi_nor_scan(struct spi_nor *nor, co
+=======
+@@ -2746,7 +2747,12 @@ int spi_nor_scan(struct spi_nor *nor, co
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
  		spi_nor_wait_till_ready(nor);
  	}
  

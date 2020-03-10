@@ -12,7 +12,13 @@ endef
 
 define Device/wd-mbwe
   DEVICE_DTS := ox810se-wd-mbwe
+<<<<<<< HEAD
   DEVICE_TITLE := Western Digital My Book World Edition
+=======
+  DEVICE_VENDOR := Western Digital
+  DEVICE_MODEL := My Book
+  DEVICE_VARIANT := World Edition
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
   KERNEL := kernel-bin | append-dtb | uImage none
 endef
 TARGET_DEVICES += wd-mbwe

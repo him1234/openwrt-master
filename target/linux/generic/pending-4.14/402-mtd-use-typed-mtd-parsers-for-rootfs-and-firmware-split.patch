@@ -10,6 +10,7 @@ Signed-off-by: Gabor Juhos <juhosg@openwrt.org>
 
 --- a/drivers/mtd/mtdpart.c
 +++ b/drivers/mtd/mtdpart.c
+<<<<<<< HEAD
 @@ -752,6 +752,36 @@ int mtd_del_partition(struct mtd_info *m
  }
  EXPORT_SYMBOL_GPL(mtd_del_partition);
@@ -48,14 +49,22 @@ Signed-off-by: Gabor Juhos <juhosg@openwrt.org>
  #define SPLIT_FIRMWARE_NAME	CONFIG_MTD_SPLIT_FIRMWARE_NAME
  #else
 @@ -760,6 +790,7 @@ EXPORT_SYMBOL_GPL(mtd_del_partition);
+=======
+@@ -804,6 +804,7 @@ run_parsers_by_type(struct mtd_part *sla
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
  
  static void split_firmware(struct mtd_info *master, struct mtd_part *part)
  {
 +	run_parsers_by_type(part, MTD_PARSER_TYPE_FIRMWARE);
  }
  
+<<<<<<< HEAD
  void __weak arch_split_mtd_part(struct mtd_info *master, const char *name,
 @@ -774,6 +805,12 @@ static void mtd_partition_split(struct m
+=======
+ static void mtd_partition_split(struct mtd_info *master, struct mtd_part *part)
+@@ -813,6 +814,12 @@ static void mtd_partition_split(struct m
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
  	if (rootfs_found)
  		return;
  
@@ -65,12 +74,12 @@ Signed-off-by: Gabor Juhos <juhosg@openwrt.org>
 +		rootfs_found = 1;
 +	}
 +
- 	if (!strcmp(part->mtd.name, SPLIT_FIRMWARE_NAME) &&
- 	    IS_ENABLED(CONFIG_MTD_SPLIT_FIRMWARE))
- 		split_firmware(master, part);
+ 	if (IS_ENABLED(CONFIG_MTD_SPLIT_FIRMWARE) &&
+ 	    !strcmp(part->mtd.name, SPLIT_FIRMWARE_NAME) &&
+ 	    !of_find_property(mtd_get_of_node(&part->mtd), "compatible", NULL))
 --- a/include/linux/mtd/partitions.h
 +++ b/include/linux/mtd/partitions.h
-@@ -74,6 +74,8 @@ struct mtd_part_parser_data {
+@@ -75,6 +75,8 @@ struct mtd_part_parser_data {
  
  enum mtd_parser_type {
  	MTD_PARSER_TYPE_DEVICE = 0,

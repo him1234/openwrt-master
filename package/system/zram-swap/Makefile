@@ -9,7 +9,11 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=zram-swap
 PKG_VERSION:=1.1
+<<<<<<< HEAD
 PKG_RELEASE:=2
+=======
+PKG_RELEASE:=4
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 
 PKG_BUILD_DIR := $(BUILD_DIR)/$(PKG_NAME)
 
@@ -18,7 +22,7 @@ include $(INCLUDE_DIR)/package.mk
 define Package/zram-swap
   SECTION:=utils
   CATEGORY:=Base system
-  DEPENDS:=+kmod-zram +!BUSYBOX_CONFIG_MKSWAP:swap-utils +!BUSYBOX_CONFIG_SWAPONOFF:block-mount
+  DEPENDS:=+kmod-zram +!(BUSYBOX_DEFAULT_MKSWAP||BUSYBOX_CONFIG_MKSWAP):swap-utils +!((BUSYBOX_DEFAULT_SWAPON||BUSYBOX_CONFIG_SWAPON)&&(BUSYBOX_DEFAULT_SWAPOFF||BUSYBOX_CONFIG_SWAPOFF)):block-mount
   TITLE:=ZRAM swap scripts
   PKGARCH:=all
 endef

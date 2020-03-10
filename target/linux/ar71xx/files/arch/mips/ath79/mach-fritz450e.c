@@ -115,7 +115,11 @@ static struct gpio_keys_button fritz450E_gpio_keys[] __initdata = {
 		.code			= KEY_WPS_BUTTON,
 		.debounce_interval	= FRITZ450E_KEYS_DEBOUNCE_INTERVAL,
 		.gpio			= FRITZ450E_GPIO_BTN_WPS,
+<<<<<<< HEAD
 		.active_low		= 1,
+=======
+		.active_low		= 0,
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 	}
 };
 
@@ -129,7 +133,11 @@ static struct at803x_platform_data fritz450E_at803x_data = {
 static struct mdio_board_info fritz450E_mdio_info[] = {
 	{
 		.bus_id = "ag71xx-mdio.1",
+<<<<<<< HEAD
 		.phy_addr = FRITZ450E_PHY_ADDRESS,
+=======
+		.mdio_addr = FRITZ450E_PHY_ADDRESS,
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 		.platform_data = &fritz450E_at803x_data,
 	},
 };

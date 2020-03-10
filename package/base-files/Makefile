@@ -12,11 +12,15 @@ include $(INCLUDE_DIR)/version.mk
 include $(INCLUDE_DIR)/feeds.mk
 
 PKG_NAME:=base-files
+<<<<<<< HEAD
 PKG_RELEASE:=194.3
+=======
+PKG_RELEASE:=214
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 PKG_FLAGS:=nonshared
 
 PKG_FILE_DEPENDS:=$(PLATFORM_DIR)/ $(GENERIC_PLATFORM_DIR)/base-files/
-PKG_BUILD_DEPENDS:=usign/host
+PKG_BUILD_DEPENDS:=usign/host ucert/host
 PKG_LICENSE:=GPL-2.0
 
 # Extend depends from version.mk
@@ -43,6 +47,15 @@ define Package/base-files
   VERSION:=$(PKG_RELEASE)-$(REVISION)
 endef
 
+define Package/urandom-seed
+  SECTION:=base
+  CATEGORY:=Base system
+  DEPENDS:=+libc +ubox-getrandom
+  TITLE:=/etc/urandom.seed handling for OpenWrt
+  URL:=http://openwrt.org/
+  VERSION:=$(PKG_RELEASE)-$(REVISION)
+endef
+
 define Package/base-files/conffiles
 /etc/config/
 /etc/config/network
@@ -63,6 +76,7 @@ define Package/base-files/conffiles
 /etc/services
 /etc/shadow
 /etc/shells
+/etc/shinit
 /etc/sysctl.conf
 /etc/sysupgrade.conf
 $(call $(TARGET)/conffiles)
@@ -102,6 +116,9 @@ ifdef CONFIG_SIGNED_PACKAGES
   define Build/Configure
 	[ -s $(BUILD_KEY) -a -s $(BUILD_KEY).pub ] || \
 		$(STAGING_DIR_HOST)/bin/usign -G -s $(BUILD_KEY) -p $(BUILD_KEY).pub -c "Local build key"
+
+	[ -s $(BUILD_KEY).ucert ] || \
+		$(STAGING_DIR_HOST)/bin/ucert -I -c $(BUILD_KEY).ucert -p $(BUILD_KEY).pub -s $(BUILD_KEY)
 
   endef
 
@@ -186,12 +203,16 @@ define Package/base-files/install
 
 	$(if $(CONFIG_INCLUDE_CONFIG), \
 		echo -e "# Build configuration for board $(BOARD)/$(SUBTARGET)/$(PROFILE)\n" >$(1)/etc/build.config; \
-		cat $(BIN_DIR)/config.seed >>$(1)/etc/build.config)
+		cat $(BIN_DIR)/config.buildinfo >>$(1)/etc/build.config; \
+		cat $(BIN_DIR)/feeds.buildinfo >>$(1)/etc/build.feeds; \
+		cat $(BIN_DIR)/version.buildinfo >>$(1)/etc/build.version)
 
 	$(if $(CONFIG_CLEAN_IPKG),, \
 		mkdir -p $(1)/etc/opkg; \
 		$(call FeedSourcesAppend,$(1)/etc/opkg/distfeeds.conf); \
 		$(VERSION_SED_SCRIPT) $(1)/etc/opkg/distfeeds.conf)
+	$(if $(CONFIG_IPK_FILES_CHECKSUMS),, \
+		rm -f $(1)/sbin/pkg_check)
 endef
 
 ifneq ($(DUMP),1)

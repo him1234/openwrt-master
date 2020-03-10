@@ -94,7 +94,11 @@ static struct at803x_platform_data koala_at803x_data = {
 static struct mdio_board_info koala_mdio0_info[] = {
 	{
 		.bus_id = "ag71xx-mdio.0",
+<<<<<<< HEAD
 		.phy_addr = 5,
+=======
+		.mdio_addr = 5,
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 		.platform_data = &koala_at803x_data,
 	},
 };

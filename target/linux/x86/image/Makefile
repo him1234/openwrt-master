@@ -9,13 +9,12 @@ include $(INCLUDE_DIR)/image.mk
 
 export PATH=$(TARGET_PATH):/sbin
 
-GRUB2_MODULES = biosdisk boot chain configfile ext2 linux ls part_msdos reboot serial vga
-GRUB2_MODULES_ISO = biosdisk boot chain configfile iso9660 linux ls part_msdos reboot serial vga
+GRUB2_MODULES = biosdisk boot chain configfile ext2 linux ls part_msdos reboot serial test vga
+GRUB2_MODULES_ISO = biosdisk boot chain configfile iso9660 linux ls part_msdos reboot serial test vga
 GRUB_TERMINALS =
 GRUB_SERIAL_CONFIG =
 GRUB_TERMINAL_CONFIG =
 GRUB_CONSOLE_CMDLINE =
-GRUB_ROOT = hd0,msdos1
 
 USE_ATKBD = generic 64
 
@@ -41,15 +40,11 @@ ifneq ($(GRUB_TERMINALS),)
   GRUB_TERMINAL_CONFIG := terminal_input $(GRUB_TERMINALS); terminal_output $(GRUB_TERMINALS)
 endif
 
-SIGNATURE:=$(shell perl -e 'printf("%08x", rand(0xFFFFFFFF))')
 ROOTPART:=$(call qstrip,$(CONFIG_TARGET_ROOTFS_PARTNAME))
-ROOTPART:=$(if $(ROOTPART),$(ROOTPART),PARTUUID=$(SIGNATURE)-02)
+ROOTPART:=$(if $(ROOTPART),$(ROOTPART),PARTUUID=$(IMG_PART_SIGNATURE)-02)
 
 GRUB_TIMEOUT:=$(call qstrip,$(CONFIG_GRUB_TIMEOUT))
-
-ifneq ($(CONFIG_TARGET_x86_xen_domu),)
-  GRUB_ROOT = xen/xvda,msdos1
-endif
+GRUB_TITLE:=$(call qstrip,$(CONFIG_GRUB_TITLE))
 
 ifneq ($(CONFIG_GRUB_IMAGES),)
 
@@ -65,43 +60,47 @@ ifneq ($(CONFIG_GRUB_IMAGES),)
 
   define Image/Build/grub2
 	# left here because the image builder doesnt need these
+	rm -fR $(KDIR)/root.grub $(KDIR)/grub2
 	$(INSTALL_DIR) $(KDIR)/root.grub/boot/grub $(KDIR)/grub2
 	$(CP) $(KDIR)/bzImage $(KDIR)/root.grub/boot/vmlinuz
 	grub-mkimage \
 		-p /boot/grub \
 		-d $(STAGING_DIR_HOST)/lib/grub/i386-pc \
-		-o $(KDIR)/grub2/core.img \
+		-o $(KDIR)/root.grub/boot/grub/core.img \
 		-O i386-pc \
 		-c ./grub-early.cfg \
 		$(GRUB2_MODULES)
-	$(CP) $(STAGING_DIR_HOST)/lib/grub/i386-pc/*.img $(KDIR)/grub2/
-	echo '(hd0) $(BIN_DIR)/$(IMG_PREFIX)-combined-$(1).img' > $(KDIR)/grub2/device.map
+	$(CP) $(STAGING_DIR_HOST)/lib/grub/i386-pc/*.img $(KDIR)/root.grub/boot/grub/
+	echo '(hd0) $(BIN_DIR)/$(IMG_COMBINED)-$(1).img' > $(KDIR)/grub2/device.map
 	sed \
 		-e 's#@SERIAL_CONFIG@#$(strip $(GRUB_SERIAL_CONFIG))#g' \
 		-e 's#@TERMINAL_CONFIG@#$(strip $(GRUB_TERMINAL_CONFIG))#g' \
 		-e 's#@CMDLINE@#$(strip $(call Image/cmdline/$(1)) $(BOOTOPTS) $(GRUB_CONSOLE_CMDLINE))#g' \
 		-e 's#@TIMEOUT@#$(GRUB_TIMEOUT)#g' \
-		-e 's#@ROOT@#$(GRUB_ROOT)#g' \
+		-e 's#@TITLE@#$(GRUB_TITLE)#g' \
 		./grub.cfg > $(KDIR)/root.grub/boot/grub/grub.cfg
 	-$(CP) $(STAGING_DIR_ROOT)/boot/. $(KDIR)/root.grub/boot/
+<<<<<<< HEAD
 	PADDING="$(CONFIG_TARGET_IMAGES_PAD)" SIGNATURE="$(SIGNATURE)" PATH="$(TARGET_PATH)" $(SCRIPT_DIR)/gen_image_generic.sh \
 		$(BIN_DIR)/$(IMG_PREFIX)-combined-$(1).img \
+=======
+	grub-bios-setup -V | cut -d' ' -f3 > $(KDIR)/root.grub/boot/grub/version
+	PADDING="1" SIGNATURE="$(IMG_PART_SIGNATURE)" PATH="$(TARGET_PATH)" $(SCRIPT_DIR)/gen_image_generic.sh \
+		$(BIN_DIR)/$(IMG_COMBINED)-$(1).img \
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 		$(CONFIG_TARGET_KERNEL_PARTSIZE) $(KDIR)/root.grub \
 		$(CONFIG_TARGET_ROOTFS_PARTSIZE) $(KDIR)/root.$(1) \
 		256
 	grub-bios-setup \
 		--device-map="$(KDIR)/grub2/device.map" \
-		-d "$(KDIR)/grub2" \
+		-d "$(KDIR)/root.grub/boot/grub" \
 		-r "hd0,msdos1" \
-		"$(BIN_DIR)/$(IMG_PREFIX)-combined-$(1).img"
+		"$(BIN_DIR)/$(IMG_COMBINED)-$(1).img"
   endef
 endif
 
-define Image/Build/squashfs
-	dd if=/dev/zero bs=128k count=1 >> $(KDIR)/root.squashfs
-endef
-
 define Image/Build/iso
+	rm -fR $(KDIR)/root.grub $(KDIR)/grub2
 	$(INSTALL_DIR) $(KDIR)/root.grub/boot/grub $(KDIR)/grub2
 	$(CP) $(KDIR)/bzImage $(KDIR)/root.grub/boot/vmlinuz
 	grub-mkimage \
@@ -120,6 +119,7 @@ define Image/Build/iso
 		-e 's#@TERMINAL_CONFIG@#$(strip $(GRUB_TERMINAL_CONFIG))#g' \
 		-e 's#@CMDLINE@#root=/dev/sr0 rootfstype=iso9660 rootwait $(strip $(call Image/cmdline/$(1)) $(BOOTOPTS) $(GRUB_CONSOLE_CMDLINE))#g' \
 		-e 's#@TIMEOUT@#$(GRUB_TIMEOUT)#g' \
+		-e 's#@TITLE@#$(GRUB_TITLE)#g' \
 		./grub-iso.cfg > $(KDIR)/root.grub/boot/grub/grub.cfg
 	-$(CP) $(STAGING_DIR_ROOT)/boot/. $(KDIR)/root.grub/boot/
 	mkisofs -R -b boot/grub/eltorito.img -no-emul-boot -boot-info-table \
@@ -128,37 +128,34 @@ endef
 
 ifneq ($(CONFIG_VDI_IMAGES),)
   define Image/Build/vdi
-	rm $(BIN_DIR)/$(IMG_PREFIX)-combined-$(1).vdi || true
-	qemu-img convert -f raw -O vdi \
-		$(BIN_DIR)/$(IMG_PREFIX)-combined-$(1).img \
-		$(BIN_DIR)/$(IMG_PREFIX)-combined-$(1).vdi
-	# XXX: VBoxManage insists on setting perms to 0600
-	chmod 0644 $(BIN_DIR)/$(IMG_PREFIX)-combined-$(1).vdi
+	rm $(BIN_DIR)/$(IMG_COMBINED)-$(1).vdi || true
+	$(STAGING_DIR_HOST)/bin/qemu-img convert -f raw -O vdi \
+		$(BIN_DIR)/$(IMG_COMBINED)-$(1).img \
+		$(BIN_DIR)/$(IMG_COMBINED)-$(1).vdi
   endef
 endif
 
 ifneq ($(CONFIG_VMDK_IMAGES),)
   define Image/Build/vmdk
-	rm $(BIN_DIR)/$(IMG_PREFIX)-combined-$(1).vmdk || true
-	qemu-img convert -f raw -O vmdk \
-		$(BIN_DIR)/$(IMG_PREFIX)-combined-$(1).img \
-		$(BIN_DIR)/$(IMG_PREFIX)-combined-$(1).vmdk
+	rm $(BIN_DIR)/$(IMG_COMBINED)-$(1).vmdk || true
+	$(STAGING_DIR_HOST)/bin/qemu-img convert -f raw -O vmdk \
+		$(BIN_DIR)/$(IMG_COMBINED)-$(1).img \
+		$(BIN_DIR)/$(IMG_COMBINED)-$(1).vmdk
+	#build the ESXI VMDK with 
+	rm $(BIN_DIR)/$(IMG_COMBINED)-$(1)-esxi.vmdk || true
+	rm $(BIN_DIR)/$(IMG_COMBINED)-$(1)-esxi-flat.vmdk || true
+	$(STAGING_DIR_HOST)/bin/qemu-img convert -f raw -O vmdk -o adapter_type=lsilogic,subformat=monolithicFlat \
+		$(BIN_DIR)/$(IMG_COMBINED)-$(1).img \
+		$(BIN_DIR)/$(IMG_COMBINED)-$(1)-esxi.vmdk
   endef
 endif
 
 define Image/Build/gzip
-	gzip -f9n $(BIN_DIR)/$(IMG_PREFIX)-combined-$(1).img
-	gzip -f9n $(BIN_DIR)/$(IMG_PREFIX)-rootfs-$(1).img
+	gzip -f9n $(BIN_DIR)/$(IMG_COMBINED)-$(1).img
+	gzip -f9n $(BIN_DIR)/$(IMG_ROOTFS)-$(1).img
 endef
 
-ifneq ($(CONFIG_TARGET_IMAGES_GZIP),)
-  define Image/Build/gzip/ext4
-	$(call Image/Build/gzip,ext4)
-  endef
-  define Image/Build/gzip/squashfs
-	$(call Image/Build/gzip,squashfs)
-  endef
-endif
+$(eval $(call Image/gzip-ext4-padded-squashfs))
 
 define Image/BuildKernel
 	$(CP) $(KDIR)/bzImage $(BIN_DIR)/$(IMG_PREFIX)-vmlinuz
@@ -178,7 +175,7 @@ define Image/Build
 	$(call Image/Build/grub2,$(1))
 	$(call Image/Build/vdi,$(1))
 	$(call Image/Build/vmdk,$(1))
-	$(CP) $(KDIR)/root.$(1) $(BIN_DIR)/$(IMG_PREFIX)-rootfs-$(1).img
+	$(CP) $(KDIR)/root.$(1) $(BIN_DIR)/$(IMG_ROOTFS)-$(1).img
   else
 	$(CP) $(KDIR)/root.iso $(BIN_DIR)/$(IMG_PREFIX).iso
   endif

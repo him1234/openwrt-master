@@ -33,7 +33,11 @@
  /*
   * Write status register 1 byte
   * Returns negative if error occurred.
+<<<<<<< HEAD
 @@ -2893,9 +2902,16 @@ int spi_nor_scan(struct spi_nor *nor, co
+=======
+@@ -2898,9 +2907,16 @@ int spi_nor_scan(struct spi_nor *nor, co
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
  	} else if (mtd->size > 0x1000000) {
  		/* enable 4-byte addressing if the device exceeds 16MiB */
  		nor->addr_width = 4;

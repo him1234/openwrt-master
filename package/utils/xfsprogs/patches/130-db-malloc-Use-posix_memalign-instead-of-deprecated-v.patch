@@ -12,8 +12,11 @@ Signed-off-by: Rosen Penev <rosenp@gmail.com>
  db/malloc.c | 3 +--
  1 file changed, 1 insertion(+), 2 deletions(-)
 
+<<<<<<< HEAD
 diff --git a/db/malloc.c b/db/malloc.c
 index 77b3e022..38fe0b05 100644
+=======
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 --- a/db/malloc.c
 +++ b/db/malloc.c
 @@ -56,8 +56,7 @@ xmalloc(
@@ -26,6 +29,9 @@ index 77b3e022..38fe0b05 100644
  		return ptr;
  	badmalloc();
  	/* NOTREACHED */
+<<<<<<< HEAD
 -- 
 2.17.1
 
+=======
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef

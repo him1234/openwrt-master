@@ -1,6 +1,10 @@
 --- a/wpa_supplicant/wpa_supplicant.c
 +++ b/wpa_supplicant/wpa_supplicant.c
+<<<<<<< HEAD
 @@ -2124,11 +2124,13 @@ void ibss_mesh_setup_freq(struct wpa_sup
+=======
+@@ -2216,11 +2216,13 @@ void ibss_mesh_setup_freq(struct wpa_sup
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
  	for (j = 0; j < wpa_s->last_scan_res_used; j++) {
  		struct wpa_bss *bss = wpa_s->last_scan_res[j];
  

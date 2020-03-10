@@ -3,6 +3,7 @@
 # In case the check fails during boot, a failsafe-system is started to provide
 # a minimal web-interface for flashing a new firmware.
 
+<<<<<<< HEAD
 # make sure we got uboot-envtools and fw_env.config copied over to the ramfs
 # create /var/lock for the lock "fw_setenv.lock" of fw_setenv
 platform_add_ramfs_ubootenv() {
@@ -12,6 +13,8 @@ platform_add_ramfs_ubootenv() {
 }
 append sysupgrade_pre_upgrade platform_add_ramfs_ubootenv
 
+=======
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 # determine size of the main firmware partition
 platform_get_firmware_size() {
 	local dev size erasesize name
@@ -153,6 +156,8 @@ rootfs_size $rootfs_hexsize
 rootfs_checksum $rootfs_md5
 bootcmd bootm $vmlinux_hexaddr
 EOF
+
+	mkdir -p /var/lock
 	fw_setenv -s /tmp/fw_env_upgrade || {
 		echo "failed to update U-Boot environment"
 		return 1

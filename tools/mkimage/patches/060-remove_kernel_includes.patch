@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 --- a/include/compiler.h
 +++ b/include/compiler.h
 @@ -66,6 +66,10 @@ typedef uint8_t __u8;
@@ -11,6 +12,11 @@
  
  #define uswap_16(x) \
  	((((x) & 0xff00) >> 8) | \
+=======
+The Kernel includes are only available on Linux hosts, remove then on
+non Linux hosts. 
+
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 --- a/include/linux/posix_types.h
 +++ b/include/linux/posix_types.h
 @@ -43,6 +43,8 @@ typedef void (*__kernel_sighandler_t)(in
@@ -22,13 +28,18 @@
 +#endif
  
  #endif /* _LINUX_POSIX_TYPES_H */
---- a/include/linux/types.h
-+++ b/include/linux/types.h
-@@ -2,7 +2,6 @@
- #define _LINUX_TYPES_H
+--- a/include/imx8image.h
++++ b/include/imx8image.h
+@@ -11,7 +11,12 @@
+ #include <image.h>
+ #include <inttypes.h>
+ #include "imagetool.h"
++#ifdef linux
+ #include "linux/kernel.h"
++#else
++#define ALIGN(x,a)		__ALIGN_MASK((x),(typeof(x))(a)-1)
++#define __ALIGN_MASK(x,mask)	(((x)+(mask))&~(mask))
++#endif
  
- #include <linux/posix_types.h>
--#include <asm/types.h>
- #include <stdbool.h>
+ #define __packed   __attribute__((packed))
  
- #ifndef __KERNEL_STRICT_NAMES

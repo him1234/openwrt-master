@@ -2,7 +2,11 @@ diff --git a/lib/stdio.in.h b/lib/stdio.in.h
 index ff7c9c8..f391832 100644
 --- a/lib/stdio.in.h
 +++ b/lib/stdio.in.h
+<<<<<<< HEAD
 @@ -739,14 +739,6 @@ _GL_WARN_ON_USE (getline, "getline is unportable - "
+=======
+@@ -778,14 +778,6 @@ _GL_WARN_ON_USE (getline, "getline is un
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
  # endif
  #endif
  

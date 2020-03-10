@@ -9,7 +9,10 @@ include $(INCLUDE_DIR)/kernel.mk
 
 PKG_NAME:=ltq-ptm
 PKG_RELEASE:=2
+<<<<<<< HEAD
 PKG_BUILD_DIR:=$(KERNEL_BUILD_DIR)/ltq-ptm-$(BUILD_VARIANT)
+=======
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 
 PKG_MAINTAINER:=John Crispin <john@phrozen.org>
 PKG_LICENSE:=GPL-2.0+

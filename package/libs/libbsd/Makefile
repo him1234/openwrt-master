@@ -1,24 +1,35 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libbsd
+<<<<<<< HEAD
 PKG_VERSION:=0.8.7
 PKG_RELEASE:=2
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_HASH:=f548f10e5af5a08b1e22889ce84315b1ebe41505b015c9596bad03fd13a12b31
 PKG_SOURCE_URL:=https://libbsd.freedesktop.org/releases
+=======
+PKG_VERSION:=0.10.0
+PKG_RELEASE:=1
+
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
+PKG_SOURCE_URL:=https://libbsd.freedesktop.org/releases
+PKG_HASH:=34b8adc726883d0e85b3118fa13605e179a62b31ba51f676136ecb2d0bc1a887
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 
 PKG_LICENSE:=BSD-4-Clause
 PKG_LICENSE_FILES:=COPYING
 
-include $(INCLUDE_DIR)/package.mk
-
 PKG_INSTALL:=1
+PKG_BUILD_PARALLEL:=1
+
+include $(INCLUDE_DIR)/package.mk
 
 define Package/libbsd
   SECTION:=libs
   CATEGORY:=Libraries
   TITLE:=common BSD library
+  ABI_VERSION:=0
 endef
 
 define Package/libbsd/description
@@ -36,7 +47,11 @@ endef
 
 define Package/libbsd/install
 	$(INSTALL_DIR) $(1)/usr/lib
+<<<<<<< HEAD
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libbsd.so* $(1)/usr/lib/
+=======
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libbsd.so.* $(1)/usr/lib/
+>>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 endef
 
 $(eval $(call BuildPackage,libbsd))
