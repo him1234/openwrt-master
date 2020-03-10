@@ -1,0 +1,13 @@
+{
+  "name": "openwrt",
+  "description": "Automated semver compliant package publishing",
+  "version": "0.0.0-development",
+  "author": "him1234",
+  "bugs": {
+    "url": "https://github.com/him1234/openwrt-master/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/him1234/openwrt-master.git"
+  }
+}
