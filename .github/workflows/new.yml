@@ -22,11 +22,8 @@ jobs:
           tar --warning=no-file-changed -czvf release.tar.gz ./package
           
       - name: Upload to Release
-        uses: JasonEtco/upload-to-release@v0.1.1
+        uses: JasonEtco/upload-to-release@master
         with:
-          branch: master
-          name: OpenWrt PSG1218a firmware
-          args: release.tar.gz application/octet-stream
-          path: ./release.tar.gz
+          args: ./release.tar.gz 
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASES_TOKEN }}
