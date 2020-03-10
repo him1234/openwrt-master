@@ -24,10 +24,10 @@ jobs:
       - uses: majkrzak/create-release@master
         with:
             token: ${{secrets.RELEASES_TOKEN}}
-            name: My lovely release
+            name: Openwrt latest for psg1218a daily build 模拟发布
             code: latest
             prerelease: true
             assets: >
-                release.tar.gz:target:
+                release.tar.gz:target.tar.gz
           
 
