@@ -70,16 +70,16 @@ jobs:
           name: OpenWrt PSG1218a firmware
           path: ./bin/targets/
 
-      - name: Gzip
+      - name: 版本打包，准备发布
         run: |
-          mkdir openwrt-psg1218a-${{ matrix.os }}
-          cp -r ./bin/targets/ramips/mt7620 openwrt-psg1218a-${{ matrix.os }}
-          tar -czvf openwrt-psg1218a-${{ matrix.os }}.tar.gz openwrt-psg1218a-${{ matrix.os }}
+          tar --warning=no-file-changed -czvf release.tar.gz ./bin/targets/
           
-      - name: Upload to release
-        uses: JasonEtco/upload-to-release@master
+      - name: 发布新版本
+        uses: majkrzak/create-release@master
         with:
-          args: openwrt-psg1218a-${{ matrix.os }}.tar.gz application/octet-stream
-                ./bin/targets/*  application/octet-stream
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            token: ${{secrets.RELEASES_TOKEN}}
+            name: Openwrt latest for psg1218a daily build
+            code: openwrt-18
+            prerelease: true
+            assets: >
+                release.tar.gz:openwrt-18.06-psg1218a-latest.tar.gz:
