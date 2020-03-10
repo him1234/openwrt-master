@@ -1,4 +1,4 @@
-name: openwrt for PSG1218a 每日构建
+name: openwrt for PSG1218a
 
 on:
   push:

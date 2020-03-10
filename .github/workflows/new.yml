@@ -26,8 +26,8 @@ jobs:
             token: ${{secrets.RELEASES_TOKEN}}
             name: Openwrt latest for psg1218a daily build 模拟发布
             code: latest
-            prerelease: true
+            prerelease: flase
             assets: >
-                release.tar.gz:target.tar.gz
+                release.tar.gz
           
 
