@@ -17,19 +17,16 @@ jobs:
         uses: actions/checkout@master
         with:
           ref: master
-          
-      - name: Semantic Release
-        uses: cycjimmy/semantic-release-action@v2
-        with:
-            branch: master
-            name: OpenWrt PSG1218a firmware
-            path: ./bin/targets/
+      - name: Space cleanup
         env:
-            GITHUB_TOKEN: ${{ secrets.RELEASES_TOKEN }}
-           
-      - name: Release Drafter
-        uses: release-drafter/release-drafter@v5.7.0
-        with:
-            config-name: .github/release-drafter.yml
+          DEBIAN_FRONTEND: noninteractive
+        run: |
+        sudo -E apt-get -y install tar
+        sudo  tar -zcvf /mnt/openwrt-master/* ./ceshi.tar.gz
+
+       - name: Upload to Release
+         uses: JasonEtco/upload-to-release@v0.1.1
+         with:
+          args: ceshi.tar.gz
         env:
-            GITHUB_TOKEN: ${{ secrets.RELEASES_TOKEN}}
+          GITHUB_TOKEN: ${{ secrets.RELEASES_TOKEN }}
