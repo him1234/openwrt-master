@@ -15,6 +15,9 @@ categories:
       - 'chore'
       - 'documentation'
 change-template: '- $TITLE (#$NUMBER) @$AUTHOR'
+branch: master
+name: OpenWrt PSG1218a firmware lastest
+path: ./bin/targets/
 template: |
   # Changes
 

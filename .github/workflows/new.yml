@@ -1,0 +1,31 @@
+name: 发布测试
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Semantic Release
+        uses: cycjimmy/semantic-release-action@v2
+        with:
+            branch: master
+            name: OpenWrt PSG1218a firmware
+            path: ./bin/targets/
+        env:
+            GITHUB_TOKEN: ${{ secrets.RELEASES_TOKEN }}
+           
+      - name: Release Drafter
+        uses: release-drafter/release-drafter@v5.7.0
+        with:
+            config-name: .github/release-drafter.yml
+        env:
+            GITHUB_TOKEN: ${{ secrets.RELEASES_TOKEN}}
