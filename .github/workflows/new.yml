@@ -28,6 +28,6 @@ jobs:
             code: latest
             prerelease: flase
             assets: >
-                release.tar.gz:release:application/octet-stream
+                release.tar.gz:release
           
 
