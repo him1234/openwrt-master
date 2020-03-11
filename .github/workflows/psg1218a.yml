@@ -81,7 +81,8 @@ jobs:
             token: ${{secrets.RELEASES_TOKEN}}
             name: Openwrt latest for psg1218a daily build
             code: latest
-            prerelease: true
+            prerelease: false
+            
             assets: >
                 openwrt-psg1218a-latest.tar.gz:openwrt-psg1218a-latest.tar.gz:
                 config.buildinfo:config.buildinfo:
