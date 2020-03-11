@@ -74,7 +74,7 @@ jobs:
       - name: publish prepare
         run: |
           tar --warning=no-file-changed -czvf openwrt-psg1218a-latest.tar.gz ./bin/targets/ramips/mt7620
-          cp ./bin/targets/ramips/mt7620 ./
+          cp ./bin/targets/ramips/mt7620/* ./
           
       - uses: majkrzak/create-release@master
         with:
