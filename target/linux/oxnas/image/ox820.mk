@@ -1,5 +1,4 @@
-UBIFS_OPTS = -m 2048 -e 126KiB -c 4096
-DEVICE_VARS += DTS UBIFS_OPTS
+UBIFS_OPTS := -m 2048 -e 126KiB -c 4096
 KERNEL_LOADADDR := 0x60008000
 
 define Device/Default
@@ -10,9 +9,13 @@ define Device/Default
   PAGESIZE := 2048
   SUBPAGESIZE := 512
   FILESYSTEMS := squashfs ubifs
+<<<<<<< HEAD
   PROFILES = Default $$(DTS)
 <<<<<<< HEAD
 =======
+=======
+  PROFILES := Default
+>>>>>>> 763de7bd51f38f0b9e155bd6160d552d9a0fd2ae
   SUPPORTED_DEVICES := $(subst _,$(comma),$(1))
   DEVICE_DTS := ox820-$(subst _,-,$(1))
 >>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef

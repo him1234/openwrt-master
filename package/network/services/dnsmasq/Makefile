@@ -9,6 +9,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=dnsmasq
 <<<<<<< HEAD
+<<<<<<< HEAD
 PKG_VERSION:=2.80
 PKG_RELEASE:=1.4
 
@@ -17,13 +18,20 @@ PKG_SOURCE_URL:=http://thekelleys.org.uk/dnsmasq
 PKG_HASH:=cdaba2785e92665cf090646cba6f94812760b9d7d8c8d0cfb07ac819377a63bb
 =======
 PKG_UPSTREAM_VERSION:=2.81rc2
+=======
+PKG_UPSTREAM_VERSION:=2.81rc3
+>>>>>>> 763de7bd51f38f0b9e155bd6160d552d9a0fd2ae
 PKG_VERSION:=$(subst test,~~test,$(subst rc,~rc,$(PKG_UPSTREAM_VERSION)))
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_UPSTREAM_VERSION).tar.xz
 PKG_SOURCE_URL:=http://thekelleys.org.uk/dnsmasq/release-candidates
+<<<<<<< HEAD
 PKG_HASH:=218a5414836c0a553b57f5506d001f48b5eadc869d0fa21499ab1cdca75c1912
 >>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
+=======
+PKG_HASH:=c516904cec0ecb45b02ae7c192a4f08a59f734c7a332c15b26b44ffa3ae2925e
+>>>>>>> 763de7bd51f38f0b9e155bd6160d552d9a0fd2ae
 
 PKG_LICENSE:=GPL-2.0
 PKG_LICENSE_FILES:=COPYING

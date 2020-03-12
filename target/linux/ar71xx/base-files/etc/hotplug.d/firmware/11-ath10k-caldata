@@ -199,7 +199,7 @@ case "$FIRMWARE" in
 >>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
 		ln -sf /lib/firmware/ath10k/pre-cal-pci-0000\:00\:00.0.bin \
 			/lib/firmware/ath10k/QCA9888/hw2.0/board.bin
-		ath10kcal_patch_mac $(macaddr_add $(cat /sys/class/net/eth0/address) -1)
+		ath10kcal_patch_mac $(macaddr_add $(cat /sys/class/net/eth1/address) -1)
 		;;
 	cf-e385ac)
 		ath10kcal_extract "art" 0x5000 0x2f20

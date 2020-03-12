@@ -8,6 +8,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=cmake
 <<<<<<< HEAD
+<<<<<<< HEAD
 PKG_VERSION:=3.11.4
 PKG_CPE_ID:=cpe:/a:kitware:cmake
 
@@ -17,13 +18,20 @@ PKG_SOURCE_URL:=https://cmake.org/files/v3.11/ \
 PKG_HASH:=8f864e9f78917de3e1483e256270daabc4a321741592c5b36af028e72bff87f5
 =======
 PKG_VERSION:=3.16.2
+=======
+PKG_VERSION:=3.16.5
+>>>>>>> 763de7bd51f38f0b9e155bd6160d552d9a0fd2ae
 PKG_CPE_ID:=cpe:/a:kitware:cmake
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://github.com/Kitware/CMake/releases/download/v$(PKG_VERSION)/ \
 		https://cmake.org/files/v3.16/
+<<<<<<< HEAD
 PKG_HASH:=8c09786ec60ca2be354c29829072c38113de9184f29928eb9da8446a5f2ce6a9
 >>>>>>> 2a18840cc773425668fdfd99429d74ef0ab3a8ef
+=======
+PKG_HASH:=5f760b50b8ecc9c0c37135fae5fbf00a2fef617059aa9d61c1bb91653e5a8bfc
+>>>>>>> 763de7bd51f38f0b9e155bd6160d552d9a0fd2ae
 
 HOST_BUILD_PARALLEL:=1
 HOST_CONFIGURE_PARALLEL:=1

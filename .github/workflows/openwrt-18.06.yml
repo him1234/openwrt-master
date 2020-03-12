@@ -49,7 +49,7 @@ jobs:
           make defconfig
       - name: Make download
         run: |
-          make download -j8
+          make download -j10
           find ./dl/ -size -1024c -exec rm -f {} \;
       - name: Compile firmware
         run: |
@@ -73,6 +73,7 @@ jobs:
       - name: 版本打包，准备发布
         run: |
           tar --warning=no-file-changed -czvf release.tar.gz ./bin/targets/
+          cp ./bin/targets/ramips/mt7620/* ./
           
       - name: 发布新版本
         uses: majkrzak/create-release@master
