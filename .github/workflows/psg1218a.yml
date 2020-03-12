@@ -15,7 +15,7 @@ jobs:
     steps:
 
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v1
         with:
           ref: master
 
@@ -101,6 +101,8 @@ jobs:
             user: ${{ secrets.FTP_USER }}
             password: ${{ secrets.FTP_PWD }}
             syncroot: ./bin/targets/ramips/mt7620/
+            
+
                 
 
 
