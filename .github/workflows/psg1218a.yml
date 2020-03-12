@@ -94,6 +94,7 @@ jobs:
          
       - name: publish prepare
         run: |
+          mkdir ./psg1218a
           cp ./bin/targets/ramips/mt7620/* ./psg1218a
 
       - name: git-ftp push
