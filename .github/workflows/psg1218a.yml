@@ -92,18 +92,7 @@ jobs:
                 sha256sums:sha256sums:
                 version.buildinfo:version.buildinfo:
          
-      - name: publish prepare
-        run: |
-          mkdir ./psg1218a
-          cp ./bin/targets/ramips/mt7620/* ./psg1218a
 
-      - name: git-ftp push
-        uses: sebastianpopp/git-ftp-action@releases/v2
-        with:
-            url: "ftp://43.226.151.44:21"
-            user: ${{ secrets.FTP_USER }}
-            password: ${{ secrets.FTP_PWD }}
-            syncroot: ./psg1218a
             
 
                 
